@@ -1,0 +1,31 @@
+import getReducer from '../getReducer';
+<% if (action) { -%>
+import {<%= REQUEST %>, <%= SUCCESS %>, <%= FAILURE %>} from '../../action/<%= directory %>/<%= action %>';
+<% } -%>
+
+function <%= reducer %>(state = {
+  isFetching: false,
+  loaded: false
+}, action) {
+  switch (action.type) {
+<% if (action) { -%>
+    case <%= REQUEST %>:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    case <%= SUCCESS %>:
+      return Object.assign({}, state, {
+        isFetching: false,
+        loaded: true
+      });
+    case <%= FAILURE %>:
+      return Object.assign({}, state, {
+        isFetching: false
+      });
+<% } -%>
+    default:
+      return state;
+  }
+}
+
+export default getReducer(<%= reducer %>);

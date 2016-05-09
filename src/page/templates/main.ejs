@@ -1,0 +1,13 @@
+<% if (title) { -%>
+/* title: <%= title %> */
+<% } -%>
+import renderToApp from '../../renderToApp';
+<% if (reducer) { -%>
+import reducer from '../../reducer/<%= directory %>/<%= reducer %>';
+<% } else { -%>
+import getReducer from '../../reducer/getReducer';
+const reducer = getReducer();
+<% } -%>
+import <%= container %> from '../../container/<%= directory %>/<%= container %>';
+
+renderToApp(reducer, <%= container %>);

@@ -1,0 +1,42 @@
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import <%= action %> from '../../action/<%= directory %>/<%= action %>';
+import <%= component %> from '../../component/<%= directory %>/<%= component %>';
+
+import '../../assets/pages/<%= directory %>/<%= asset %>.scss';
+
+class <%= container %> extends Component {
+  static displayName = '<%= module %><%= container %>';
+
+  static propTypes = {
+    <%= action %>: PropTypes.func,
+  };
+
+  static contextTypes = {
+    frog: PropTypes.object
+  };
+
+  componentWillMount() {
+    this.props.<%= action %>();
+  }
+
+  componentDidMount() {
+    this.context.frog.ui.window.openDropDownRefresh(() => {
+      this.props.<%= action %>(true, false);
+    });
+  }
+
+  render() {
+    return (
+      <<%= component %> />
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps, {
+  <%= action %>
+})(<%= container %>);

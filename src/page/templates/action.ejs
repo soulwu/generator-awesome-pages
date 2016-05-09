@@ -1,0 +1,27 @@
+import {CALL_API} from '../../middleware/api';
+
+export const <%= REQUEST %> = '<%= REQUEST %>';
+export const <%= SUCCESS %> = '<%= SUCCESS %>';
+export const <%= FAILURE %> = '<%= FAILURE %>';
+
+function <%= action %>(showLoading) {
+  return {
+    [CALL_API]: {
+      types: [<%= REQUEST %>, <%= SUCCESS %>, <%= FAILURE %>],
+      endpoint: '', // todo add endpoint
+      json: true,
+      showLoading
+    }
+  };
+}
+
+export default (force = false, showLoading = true) => {
+  return (dispatch, getState) => {
+    const {isFetching, loaded} = getState().page;
+    if (isFetching || loaded && !force) {
+      return null;
+    }
+
+    return dispatch(<%= action %>(showLoading));
+  };
+};
