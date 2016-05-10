@@ -181,17 +181,24 @@ class PageGenerator extends yeoman.Base {
     const directory = this.__getDirectoryName();
     const asset = this.__getAssetName();
 
-    this.fs.copy(
-      this.templatePath('scss.ejs'),
-      this.destinationPath('assets/pages', directory, `${asset}.scss`)
-    );
-
     this.fs.copyTpl(
-      this.templatePath('html.ejs'),
+      this.templatePath('asset/html.ejs'),
       this.destinationPath('assets/pages', directory, `${asset}.html`),
       {
         title: this.options.title
       }
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('asset/scss.ejs'),
+      this.destinationPath('assets/pages', directory, `${asset}.scss`),
+      {}
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('asset/js.ejs'),
+      this.destinationPath('assets/pages', directory, `${asset}.js`),
+      {}
     );
   }
 
