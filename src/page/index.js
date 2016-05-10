@@ -1,28 +1,9 @@
-import yeoman from 'yeoman-generator';
+import Base from '../Base';
 import _ from 'underscore.string';
 
-class PageGenerator extends yeoman.Base {
+class PageGenerator extends Base {
   constructor(...args) {
     super(...args);
-
-    this.argument('module', {
-      desc: 'Module name, e.g. crowdfunding, invite, etc.',
-      type: String,
-      required: true
-    });
-
-    this.argument('name', {
-      desc: 'Page name, e.g. list, detail, etc.',
-      type: String,
-      required: true
-    });
-
-    this.option('title', {
-      desc: 'Page title',
-      type: String,
-      alias: 't',
-      defaults: '财富派'
-    });
 
     this.option('no-reducer', {
       desc: 'No individual root reducer',
@@ -35,18 +16,6 @@ class PageGenerator extends yeoman.Base {
       type: Boolean,
       defaults: false
     });
-
-    this.destinationRoot('src');
-    this.module = _.classify(this.module);
-    this.name = _.camelcase(this.name, true);
-  }
-
-  __getDirectoryName() {
-    return this.module.toLowerCase();
-  }
-
-  __getAssetName() {
-    return this.name;
   }
 
   __getContainerName() {
@@ -177,38 +146,12 @@ class PageGenerator extends yeoman.Base {
     );
   }
 
-  _writeAsset() {
-    const directory = this.__getDirectoryName();
-    const asset = this.__getAssetName();
-
-    this.fs.copyTpl(
-      this.templatePath('asset/html.ejs'),
-      this.destinationPath('assets/pages', directory, `${asset}.html`),
-      {
-        title: this.options.title
-      }
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('asset/scss.ejs'),
-      this.destinationPath('assets/pages', directory, `${asset}.scss`),
-      {}
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('asset/js.ejs'),
-      this.destinationPath('assets/pages', directory, `${asset}.js`),
-      {}
-    );
-  }
-
   writing() {
     this._writeMain();
     this._writeReducer();
     this._writeAction();
     this._writeContainer();
     this._writeComponent();
-    this._writeAsset();
   }
 }
 
