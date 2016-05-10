@@ -35,14 +35,17 @@ class PageGenerator extends Base {
   }
 
   __getActionType() {
-    const modulePrefix = _.map(this.module, (ch) => {
+    let modulePrefix = _(this.module).classify().map((ch) => {
       const charCode = ch.charCodeAt(0);
       if (charCode >= 65 && charCode <= 90) {
         return ch;
       }
 
       return '';
-    });
+    }).value();
+    if (modulePrefix.length <= 1) {
+      modulePrefix = this.module.toUpperCase();
+    }
     const actionPrefix = `${modulePrefix}_${_.underscored(this.name).toUpperCase()}`;
 
     return {
