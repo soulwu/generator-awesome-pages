@@ -1,6 +1,6 @@
 {
   "name": "generator-cfp-hybrid-pages",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "财富派Hybrid页面生成器",
   "main": "index.js",
   "scripts": {

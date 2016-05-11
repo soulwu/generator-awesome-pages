@@ -5,14 +5,14 @@ class WidgetGenerator extends yeoman.Base {
   constructor(...args) {
     super(...args);
 
-    this.argument('name', {
+    this.argument('widget', {
       desc: 'Widget name, e.g. list, progressBar, etc.',
       type: String,
       required: true
     });
 
     this.destinationRoot('src');
-    this.name = _.classify(this.name);
+    this.name = _.classify(this.widget);
   }
 
   writing() {
