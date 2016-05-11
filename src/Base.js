@@ -11,7 +11,7 @@ class Base extends yeoman.Base {
       required: true
     });
 
-    this.argument('name', {
+    this.argument('page', {
       desc: 'Page name, e.g. list, detail, etc.',
       type: String,
       required: true
@@ -25,12 +25,12 @@ class Base extends yeoman.Base {
     });
 
     this.destinationRoot('src');
-    this.module = _.classify(this.module);
-    this.name = _.camelcase(this.name, true);
+    this.moduleName = _.classify(this.module);
+    this.name = _.camelcase(this.page, true);
   }
 
   __getDirectoryName() {
-    return this.module.toLowerCase();
+    return this.moduleName.toLowerCase();
   }
 
   __getAssetName() {

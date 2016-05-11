@@ -35,7 +35,7 @@ class PageGenerator extends Base {
   }
 
   __getActionType() {
-    let modulePrefix = _(this.module).classify().map((ch) => {
+    let modulePrefix = _(this.moduleName).classify().map((ch) => {
       const charCode = ch.charCodeAt(0);
       if (charCode >= 65 && charCode <= 90) {
         return ch;
@@ -44,7 +44,7 @@ class PageGenerator extends Base {
       return '';
     }).value();
     if (modulePrefix.length <= 1) {
-      modulePrefix = this.module.toUpperCase();
+      modulePrefix = this.moduleName.toUpperCase();
     }
     const actionPrefix = `${modulePrefix}_${_.underscored(this.name).toUpperCase()}`;
 
@@ -125,7 +125,7 @@ class PageGenerator extends Base {
       this.templatePath('container.ejs'),
       this.destinationPath('container', directory, `${container}.js`),
       {
-        module: this.module,
+        moduleName: this.moduleName,
         action,
         directory,
         component,
@@ -143,7 +143,7 @@ class PageGenerator extends Base {
       this.templatePath('component.ejs'),
       this.destinationPath('component', directory, `${component}.js`),
       {
-        module: this.module,
+        moduleName: this.moduleName,
         component
       }
     );
