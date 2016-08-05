@@ -1,5 +1,4 @@
 import Base from '../Base';
-import _ from 'underscore.string';
 
 class AssetGenerator extends Base {
   constructor(...args) {
