@@ -12,6 +12,8 @@ class WidgetGenerator extends Base {
         }
 
         return '组件名只能由英文字母和数字构成，而且必须以英文字母开头';
+      }, cb: (widget) => {
+        this.name = _.classify(widget);
       }},
       {type: 'confirm', name: 'stateful', message: '组件是否有状态', default: false}
     ], true);
@@ -19,11 +21,6 @@ class WidgetGenerator extends Base {
 
   prompting() {
     return super.prompting();
-  }
-
-  _processAnswers(answers) {
-    this.name = _.classify(answers.widget);
-    this.stateful = answers.stateful;
   }
 
   writing() {

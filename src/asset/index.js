@@ -13,12 +13,6 @@ class AssetGenerator extends Base {
     return super.prompting();
   }
 
-  _processAnswers(answers) {
-    super._processAnswers(answers);
-
-    this.js = answers.js;
-  }
-
   _writeAsset() {
     const directory = this.__getDirectoryName();
     const asset = this.__getAssetName();

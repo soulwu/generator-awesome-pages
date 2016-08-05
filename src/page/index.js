@@ -15,13 +15,6 @@ class PageGenerator extends Base {
     return super.prompting();
   }
 
-  _processAnswers(answers) {
-    super._processAnswers(answers);
-
-    this.reducer = answers.reducer;
-    this.stateful = answers.stateful;
-  }
-
   __getContainerName() {
     return `${this.__getComponentName()}Page`;
   }

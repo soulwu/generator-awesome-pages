@@ -1,5 +1,8 @@
 import yeoman from 'yeoman-generator';
 import _ from 'underscore.string';
+import find from 'lodash/find';
+import isFunction from 'lodash/isFunction';
+import isUndefined from 'lodash/isUndefined';
 
 class Base extends yeoman.Base {
   constructor(...args) {
@@ -17,6 +20,8 @@ class Base extends yeoman.Base {
         }
 
         return '模块名只能由英文字母和数字构成，而且必须以英文字母开头';
+      }, cb: (module) => {
+        this.moduleName = _.classify(module);
       }},
       {type: 'input', name: 'page', message: '页面名', validate: (input) => {
         if (/^[a-z][a-z0-9]*$/i.test(input)) {
@@ -24,6 +29,8 @@ class Base extends yeoman.Base {
         }
 
         return '页面名只能由英文字母和数字构成，而且必须以英文字母开头';
+      }, cb: (page) => {
+        this.name = _.camelcase(page, true);
       }},
       {type: 'input', name: 'title', message: '页面标题', default: '财富派'}
     ]);
@@ -42,9 +49,16 @@ class Base extends yeoman.Base {
   }
 
   _processAnswers(answers) {
-    this.moduleName = _.classify(answers.module);
-    this.name = _.camelcase(answers.page, true);
-    this.title = answers.title;
+    Object.keys(answers).forEach((name) => {
+      const {cb} = find(this.questions, {name});
+      if (isFunction(cb)) {
+        cb(answers[name]);
+      } else if (isUndefined(this[name])) {
+        this[name] = answers[name];
+      } else {
+        this.log(`Prompt ${name} with value ${answers[name]} does not have a callback and can not be assign to instance directly.`);
+      }
+    });
   }
 
   __getDirectoryName() {
