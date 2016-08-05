@@ -5,28 +5,42 @@ class Base extends yeoman.Base {
   constructor(...args) {
     super(...args);
 
-    this.argument('module', {
-      desc: 'Module name, e.g. crowdfunding, invite, etc.',
-      type: String,
-      required: true
-    });
-
-    this.argument('page', {
-      desc: 'Page name, e.g. list, detail, etc.',
-      type: String,
-      required: true
-    });
-
-    this.option('title', {
-      desc: 'Page title',
-      type: String,
-      alias: 't',
-      defaults: '财富派'
-    });
-
+    this.questions = [];
     this.destinationRoot('src');
-    this.moduleName = _.classify(this.module);
-    this.name = _.camelcase(this.page, true);
+  }
+
+  initializing() {
+    this._addQuestions(
+      {type: 'input', name: 'module', message: '模块名', validate: (input) => {
+        if (/^[a-z][a-z0-9]*$/i.test(input)) {
+          return true;
+        }
+
+        return '模块名只能由英文字母和数字构成，而且必须以英文字母开头';
+      }},
+      {type: 'input', name: 'page', message: '页面名', validate: (input) => {
+        if (/^[a-z][a-z0-9]*$/i.test(input)) {
+          return true;
+        }
+
+        return '页面名只能由英文字母和数字构成，而且必须以英文字母开头';
+      }},
+      {type: 'input', name: 'title', message: '页面标题', default: '财富派'}
+    );
+  }
+
+  prompting() {
+    return this.prompt(this.questions).then(this._processAnswers.bind(this));
+  }
+
+  _addQuestions(...questions) {
+    this.questions = this.questions.concat(questions);
+  }
+
+  _processAnswers(answers) {
+    this.moduleName = _.classify(answers.module);
+    this.name = _.camelcase(answers.page, true);
+    this.title = answers.title;
   }
 
   __getDirectoryName() {

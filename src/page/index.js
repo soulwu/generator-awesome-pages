@@ -2,20 +2,24 @@ import Base from '../Base';
 import _ from 'underscore.string';
 
 class PageGenerator extends Base {
-  constructor(...args) {
-    super(...args);
+  initializing() {
+    super.initializing();
 
-    this.option('no-reducer', {
-      desc: 'No individual root reducer',
-      type: Boolean,
-      defaults: false
-    });
+    this._addQuestions(
+      {type: 'confirm', name: 'reducer', message: '是否需要生成reducer', default: true},
+      {type: 'confirm', name: 'stateful', message: '组件是否有状态', default: false}
+    );
+  }
 
-    this.option('no-action', {
-      desc: 'No startup load action',
-      type: Boolean,
-      defaults: false
-    });
+  prompting() {
+    return super.prompting();
+  }
+
+  _processAnswers(answers) {
+    super._processAnswers(answers);
+
+    this.reducer = answers.reducer;
+    this.stateful = answers.stateful;
   }
 
   __getContainerName() {
@@ -62,42 +66,15 @@ class PageGenerator extends Base {
       this.templatePath('main.ejs'),
       this.destinationPath('main', directory, `${this.name}.js`),
       {
-        title: this.options.title,
+        title: this.title,
         directory,
-        reducer: this.options['no-reducer'] ? '' : this.__getReducerName(),
+        reducer: this.reducer ? this.__getReducerName() : '',
         container: this.__getContainerName()
       }
     );
   }
 
-  _writeReducer() {
-    if (this.options['no-reducer']) {
-      return;
-    }
-
-    const directory = this.__getDirectoryName();
-    const reducer = this.__getReducerName();
-    const {REQUEST, SUCCESS, FAILURE} = this.__getActionType();
-
-    this.fs.copyTpl(
-      this.templatePath('reducer.ejs'),
-      this.destinationPath('reducer', directory, `${reducer}.js`),
-      {
-        directory,
-        reducer,
-        action: this.options['no-action'] ? '' : this.__getActionName(),
-        REQUEST,
-        SUCCESS,
-        FAILURE
-      }
-    );
-  }
-
   _writeAction() {
-    if (this.options['no-action']) {
-      return;
-    }
-
     const directory = this.__getDirectoryName();
     const action = this.__getActionName();
     const {REQUEST, SUCCESS, FAILURE} = this.__getActionType();
@@ -106,6 +83,26 @@ class PageGenerator extends Base {
       this.templatePath('action.ejs'),
       this.destinationPath('action', directory, `${action}.js`),
       {
+        action,
+        REQUEST,
+        SUCCESS,
+        FAILURE
+      }
+    );
+  }
+
+  _writeReducer() {
+    const directory = this.__getDirectoryName();
+    const reducer = this.__getReducerName();
+    const action = this.__getActionName();
+    const {REQUEST, SUCCESS, FAILURE} = this.__getActionType();
+
+    this.fs.copyTpl(
+      this.templatePath('reducer.ejs'),
+      this.destinationPath('reducer', directory, `${reducer}.js`),
+      {
+        directory,
+        reducer,
         action,
         REQUEST,
         SUCCESS,
@@ -138,21 +135,24 @@ class PageGenerator extends Base {
   _writeComponent() {
     const directory = this.__getDirectoryName();
     const component = this.__getComponentName();
+    const asset = this.__getAssetName();
 
     this.fs.copyTpl(
-      this.templatePath('component.ejs'),
+      this.templatePath(this.stateful ? 'component.ejs' : 'component-stateless.ejs'),
       this.destinationPath('component', directory, `${component}.js`),
       {
         moduleName: this.moduleName,
-        component
+        component,
+        directory,
+        asset
       }
     );
   }
 
   writing() {
     this._writeMain();
-    this._writeReducer();
     this._writeAction();
+    this.reducer && this._writeReducer();
     this._writeContainer();
     this._writeComponent();
   }

@@ -1,14 +1,22 @@
 import Base from '../Base';
 
 class AssetGenerator extends Base {
-  constructor(...args) {
-    super(...args);
+  initializing() {
+    super.initializing();
 
-    this.option('no-js', {
-      desc: 'No asset js file',
-      type: Boolean,
-      defaults: false
-    });
+    this._addQuestions(
+      {type: 'confirm', name: 'js', message: '是否需要使用js', default: true}
+    );
+  }
+
+  prompting() {
+    return super.prompting();
+  }
+
+  _processAnswers(answers) {
+    super._processAnswers(answers);
+
+    this.js = answers.js;
   }
 
   _writeAsset() {
@@ -19,7 +27,7 @@ class AssetGenerator extends Base {
       this.templatePath('html.ejs'),
       this.destinationPath('assets/pages', directory, `${asset}.html`),
       {
-        title: this.options.title
+        title: this.title
       }
     );
 
@@ -29,7 +37,7 @@ class AssetGenerator extends Base {
       {}
     );
 
-    if (!this.options['no-js']) {
+    if (this.js) {
       this.fs.copyTpl(
         this.templatePath('js.ejs'),
         this.destinationPath('assets/pages', directory, `${asset}.js`),

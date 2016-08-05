@@ -1,15 +1,12 @@
 import getReducer from '../getReducer';
 import assign from 'object-assign';
-<% if (action) { -%>
 import {<%= REQUEST %>, <%= SUCCESS %>, <%= FAILURE %>} from '../../action/<%= directory %>/<%= action %>';
-<% } -%>
 
 function <%= reducer %>(state = {
   isFetching: false,
   loaded: false
 }, action) {
   switch (action.type) {
-<% if (action) { -%>
     case <%= REQUEST %>:
       return assign({}, state, {
         isFetching: true
@@ -23,7 +20,6 @@ function <%= reducer %>(state = {
       return assign({}, state, {
         isFetching: false
       });
-<% } -%>
     default:
       return state;
   }
