@@ -1,5 +1,13 @@
 # generator-cfp-hybrid-pages
-[![Build Status](https://travis-ci.org/caifupai/generator-cfp-hybrid-pages.svg?branch=master)](https://travis-ci.org/caifupai/generator-cfp-hybrid-pages) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
+[![Dependency Status](https://dependencyci.com/github/caifupai/generator-cfp-hybrid-pages/badge)](https://dependencyci.com/github/caifupai/generator-cfp-hybrid-pages)
+[![dependencies Status](https://david-dm.org/caifupai/generator-cfp-hybrid-pages/status.svg)](https://david-dm.org/caifupai/generator-cfp-hybrid-pages)
+[![devDependencies Status](https://david-dm.org/caifupai/generator-cfp-hybrid-pages/dev-status.svg)](https://david-dm.org/caifupai/generator-cfp-hybrid-pages?type=dev)
+
+[![Build Status](https://travis-ci.org/caifupai/generator-cfp-hybrid-pages.svg?branch=master)](https://travis-ci.org/caifupai/generator-cfp-hybrid-pages)
+
 
 > [Yeoman](http://yeoman.io) generator
 
