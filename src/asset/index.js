@@ -4,9 +4,9 @@ class AssetGenerator extends Base {
   initializing() {
     super.initializing();
 
-    this._addQuestions(
+    this._addQuestions([
       {type: 'confirm', name: 'js', message: '是否需要使用js', default: true}
-    );
+    ]);
   }
 
   prompting() {

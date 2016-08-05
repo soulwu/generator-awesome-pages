@@ -1,23 +1,34 @@
-import yeoman from 'yeoman-generator';
+import Base from '../Base';
 import _ from 'underscore.string';
 
-class WidgetGenerator extends yeoman.Base {
-  constructor(...args) {
-    super(...args);
+class WidgetGenerator extends Base {
+  initializing() {
+    super.initializing();
 
-    this.argument('widget', {
-      desc: 'Widget name, e.g. list, progressBar, etc.',
-      type: String,
-      required: true
-    });
+    this._addQuestions([
+      {type: 'input', name: 'widget', message: '组件名', validate: (input) => {
+        if (/^[a-z][a-z0-9]*$/i.test(input)) {
+          return true;
+        }
 
-    this.destinationRoot('src');
-    this.name = _.classify(this.widget);
+        return '组件名只能由英文字母和数字构成，而且必须以英文字母开头';
+      }},
+      {type: 'confirm', name: 'stateful', message: '组件是否有状态', default: false}
+    ], true);
+  }
+
+  prompting() {
+    return super.prompting();
+  }
+
+  _processAnswers(answers) {
+    this.name = _.classify(answers.widget);
+    this.stateful = answers.stateful;
   }
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath('widget.ejs'),
+      this.templatePath(this.stateful ? 'widget.ejs' : 'widget-stateless.ejs'),
       this.destinationPath('component/widget', `${this.name}.js`),
       {
         widget: this.name

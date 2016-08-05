@@ -10,7 +10,7 @@ class Base extends yeoman.Base {
   }
 
   initializing() {
-    this._addQuestions(
+    this._addQuestions([
       {type: 'input', name: 'module', message: '模块名', validate: (input) => {
         if (/^[a-z][a-z0-9]*$/i.test(input)) {
           return true;
@@ -26,15 +26,19 @@ class Base extends yeoman.Base {
         return '页面名只能由英文字母和数字构成，而且必须以英文字母开头';
       }},
       {type: 'input', name: 'title', message: '页面标题', default: '财富派'}
-    );
+    ]);
+  }
+
+  _addQuestions(questions, clear = false) {
+    if (clear) {
+      this.questions = questions;
+    } else {
+      this.questions = this.questions.concat(questions);
+    }
   }
 
   prompting() {
     return this.prompt(this.questions).then(this._processAnswers.bind(this));
-  }
-
-  _addQuestions(...questions) {
-    this.questions = this.questions.concat(questions);
   }
 
   _processAnswers(answers) {

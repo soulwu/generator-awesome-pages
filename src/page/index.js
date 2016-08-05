@@ -5,10 +5,10 @@ class PageGenerator extends Base {
   initializing() {
     super.initializing();
 
-    this._addQuestions(
+    this._addQuestions([
       {type: 'confirm', name: 'reducer', message: '是否需要生成reducer', default: true},
       {type: 'confirm', name: 'stateful', message: '组件是否有状态', default: false}
-    );
+    ]);
   }
 
   prompting() {
