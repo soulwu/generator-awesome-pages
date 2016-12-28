@@ -1,8 +1,8 @@
-import yeoman from 'yeoman-generator';
+import Generator from 'yeoman-generator';
 import yosay from 'yosay';
 import chalk from 'chalk';
 
-class AppGenerator extends yeoman.Base {
+class AppGenerator extends Generator {
   constructor(...args) {
     super(...args);
 

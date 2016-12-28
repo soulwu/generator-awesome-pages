@@ -10,4 +10,11 @@ const reducer = getReducer();
 <% } -%>
 import <%= container %> from '../../container/<%= directory %>/<%= container %>';
 
-renderToApp(reducer, <%= container %>);
+const render = renderToApp(reducer);
+
+render(<%= container %>);
+if (module.hot) {
+  module.hot.accept('../../container/<%= directory %>/<%= container %>', () => {
+    render(<%= container %>);
+  });
+}

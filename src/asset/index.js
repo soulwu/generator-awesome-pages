@@ -1,6 +1,6 @@
-import Base from '../Base';
+import BaseGenerator from '../Base';
 
-class AssetGenerator extends Base {
+class AssetGenerator extends BaseGenerator {
   initializing() {
     super.initializing();
 

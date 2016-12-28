@@ -1,7 +1,7 @@
-import Base from '../Base';
+import BaseGenerator from '../Base';
 import _ from 'underscore.string';
 
-class PageGenerator extends Base {
+class PageGenerator extends BaseGenerator {
   initializing() {
     super.initializing();
 

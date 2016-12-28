@@ -1,10 +1,10 @@
-import yeoman from 'yeoman-generator';
+import Generator from 'yeoman-generator';
 import _ from 'underscore.string';
 import find from 'lodash/find';
 import isFunction from 'lodash/isFunction';
 import isUndefined from 'lodash/isUndefined';
 
-class Base extends yeoman.Base {
+class BaseGenerator extends Generator {
   constructor(...args) {
     super(...args);
 
@@ -70,4 +70,4 @@ class Base extends yeoman.Base {
   }
 }
 
-export default Base;
+export default BaseGenerator;
