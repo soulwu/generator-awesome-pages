@@ -2,11 +2,11 @@
 
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-[![Dependency Status](https://dependencyci.com/github/caifupai/generator-cfp-hybrid-pages/badge)](https://dependencyci.com/github/caifupai/generator-cfp-hybrid-pages)
-[![dependencies Status](https://david-dm.org/caifupai/generator-cfp-hybrid-pages/status.svg)](https://david-dm.org/caifupai/generator-cfp-hybrid-pages)
-[![devDependencies Status](https://david-dm.org/caifupai/generator-cfp-hybrid-pages/dev-status.svg)](https://david-dm.org/caifupai/generator-cfp-hybrid-pages?type=dev)
+[![Dependency Status](https://dependencyci.com/github/soulwu/generator-awesome-pages/badge)](https://dependencyci.com/github/soulwu/generator-awesome-pages)
+[![dependencies Status](https://david-dm.org/soulwu/generator-awesome-pages/status.svg)](https://david-dm.org/soulwu/generator-awesome-pages)
+[![devDependencies Status](https://david-dm.org/soulwu/generator-awesome-pages/dev-status.svg)](https://david-dm.org/soulwu/generator-awesome-pages?type=dev)
 
-[![Build Status](https://travis-ci.org/caifupai/generator-cfp-hybrid-pages.svg?branch=master)](https://travis-ci.org/caifupai/generator-cfp-hybrid-pages)
+[![Build Status](https://travis-ci.org/soulwu/generator-awesome-pages.svg?branch=master)](https://travis-ci.org/soulwu/generator-awesome-pages)
 
 
 > [Yeoman](http://yeoman.io) generator
@@ -35,13 +35,13 @@ Yeoman travels light. He didn't pack any generators when he moved in. You can th
 To install generator-muscle from npm, run:
 
 ```bash
-npm install -g generator-cfp-hybrid-pages
+npm install -g generator-awesome-pages
 ```
 
 Finally, initiate the generator:
 
 ```bash
-yo cfp-hybrid-pages
+yo awesome-pages
 ```
 
 ### Getting To Know Yeoman
