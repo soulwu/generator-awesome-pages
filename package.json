@@ -1,6 +1,6 @@
 {
-  "name": "generator-cfp-hybrid-pages",
-  "description": "财富派Hybrid页面生成器",
+  "name": "generator-awesome-pages",
+  "description": "页面生成器",
   "main": "index.js",
   "scripts": {
     "prebuild": "npm run clean",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/caifupai/generator-cfp-hybrid-pages.git"
+    "url": "https://github.com/soulwu/generator-awesome-pages.git"
   },
   "files": [
     "generators",
@@ -25,9 +25,9 @@
   "author": "caifupai",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/caifupai/generator-cfp-hybrid-pages/issues"
+    "url": "https://github.com/soulwu/generator-awesome-pages/issues"
   },
-  "homepage": "https://github.com/caifupai/generator-cfp-hybrid-pages#readme",
+  "homepage": "https://github.com/soulwu/generator-awesome-pages#readme",
   "dependencies": {
     "chalk": "^1.1.3",
     "lodash": "^4.17.3",
@@ -43,7 +43,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-0": "^6.16.0",
     "eslint": "^3.12.2",
-    "eslint-config-cfp": "^2.1.0",
+    "eslint-config-awesome": "^2.1.0",
     "eslint-plugin-react": "^6.8.0",
     "rimraf": "^2.5.4",
     "semantic-release": "^6.3.2"
